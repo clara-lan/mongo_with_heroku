@@ -71,28 +71,28 @@ passport.use(
   ),
 );
 
-  passport.use(
-    new FacebookStrategy(
-      {
-        clientID: keys.facebookClientID,
-        clientSecret: keys.facebookClientSecret,
-        callbackURL: '/auth/facebook/callback/',
-        profileFields: ['id', 'displayName', 'email']
-      },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ facebookID: profile.id })
-        .then((existingUser) => {
-          if (existingUser) {
-            done(null, existingUser);
-          } else {
-            new User({ facebookID: profile.id })
-              .save()
-              .then(user => {
-                done(null, user);
-              })
-          }
-          console.log(User);
-        }
-     )
-    }
-));
+//   passport.use(
+//     new FacebookStrategy(
+//       {
+//         clientID: keys.facebookClientID,
+//         clientSecret: keys.facebookClientSecret,
+//         callbackURL: '/auth/facebook/callback/',
+//         profileFields: ['id', 'displayName', 'email']
+//       },
+//     (accessToken, refreshToken, profile, done) => {
+//       User.findOne({ facebookID: profile.id })
+//         .then((existingUser) => {
+//           if (existingUser) {
+//             done(null, existingUser);
+//           } else {
+//             new User({ facebookID: profile.id })
+//               .save()
+//               .then(user => {
+//                 done(null, user);
+//               })
+//           }
+//           console.log(User);
+//         }
+//      )
+//     }
+// ));
