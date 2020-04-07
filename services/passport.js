@@ -38,7 +38,10 @@ passport.use(
       // the route user will be sent to after consent
       // the callbackURL shoulde be set in google api credential, Authorized redirect URIs 
       // to make sure users will only to be redirected to a certain urls 
-      callbackURL: '/auth/google/callback'
+      // '/auth/***' is a relative path, which will automatically following the default domain
+      callbackURL: '/auth/google/callback',
+      // ask google strategy to allow proxy like https://heroku.com
+      proxy:true
     },
     (accessToken, refreshToken, profile, done) => {
       // access token proves the accessibility to user files, it will expire
