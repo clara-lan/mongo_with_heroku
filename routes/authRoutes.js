@@ -25,14 +25,14 @@ module.exports = (app) => {
   // });
 
 //router for FACEBOOK
-app.get(
-  '/auth/facebook', 
-  passport.authenticate('facebook', {
-    scope:['profile', 'email']
-  })
-);
+// app.get(
+//   '/auth/facebook', 
+//   passport.authenticate('facebook', {
+//     scope:['profile', 'email']
+//   })
+// );
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook'));
+// app.get('/auth/facebook/callback', passport.authenticate('facebook'));
 
 
 //logout router
@@ -51,10 +51,5 @@ app.get('/api/logout', (req, res) => {
   app.get('/api/current_user',(req, res) => {
     res.send(req.user);
   })
-
-
-
-
-
-
 }
+
