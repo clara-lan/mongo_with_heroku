@@ -41,35 +41,27 @@ passport.use(
       // '/auth/***' is a relative path, which will automatically following the default domain
       callbackURL: '/auth/google/callback',
       // ask google strategy to allow proxy like https://heroku.com
-      proxy:true
+      proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // access token proves the accessibility to user files, it will expire
-      // console.log("access:", accessToken);
-      // console.log("refresh:", refreshToken);
-      // console.log("profile", profile);
 
       // check before registration existing user to prevent duplicate registration
-      User.findOne({ googleID: profile.id })
-        // add a promise to waiting for the query check
-        .then((existingUser) => {
-          if (existingUser) {
-            // already have this user, call done func(offered by passport)
-            // null signifies no error
-            // 2nd params, existingUser 
-            done(null, existingUser);
-          } else {
-            // create record, use profile.id(from json), key is googleID(from the schema)
-            new User({ googleID: profile.id })
-              // save user to mongo db
-              .save()
-              // use promise to call done after create a new user
-              // user: collections
-              .then(user => {
-                done(null, user);
-              })
-          }
-        })
+      const existingUser = await User.findOne({ googleID: profile.id })
+      // add a promise to waiting for the query check
+      if (existingUser) {
+        // already have this user, call done func(offered by passport)
+        // null signifies no error
+        // 2nd params, existingUser 
+        return done(null, existingUser);
+      } 
+        // create record, use profile.id(from json), key is googleID(from the schema)
+      const user = await new User({ googleID: profile.id }).save()
+        // save user to mongo db
+
+        // use promise to call done after create a new user
+        // user: collections
+      done(null, user);
     }
   ),
 );
@@ -99,3 +91,27 @@ passport.use(
 //      )
 //     }
 // ));
+
+
+// promise:
+// function fetchSth(){
+//  fetch('url')
+//    .then(res => res.json)
+//    .then(json => console.log(json))
+//}
+// fetchSth(); // callback
+
+// async version
+// async function fetchSth(){
+//  const res = await fetch('url')
+//  const json = await res.json()
+//  console.log(json)
+//}
+// fetchSth();// callback
+
+// 
+// const fetchSth = async() =>{
+//  const res = await fetch('url);
+//  const json = await res.json();
+//  console.log(json);
+//}
