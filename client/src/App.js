@@ -12,11 +12,12 @@ function App() {
         </p>
         <a
           className="App-link"
+          //use relative link and setupProxy file to find root route
           href="/auth/google"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Signin with Google.
+          Sign In with Google.
         </a>
       </header>
     </div>
