@@ -1,12 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Navbar, Nav} from 'react-bootstrap';
 
-class Header extends Component {
-  render(){
-    return(
-      <div>
-        New Header 
-      </div>
-  )}
-};
+function Header() {
+
+  return (
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand >Emaily</Navbar.Brand>
+      <Navbar.Collapse>
+        <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link href="#home">Home</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="#link">Login With Google</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+
+  );
+}
+
+
+
 
 export default Header;
