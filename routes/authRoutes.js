@@ -50,6 +50,6 @@ app.get('/api/logout', (req, res) => {
   // res: result output
   app.get('/api/current_user',(req, res) => {
     res.send(req.user);
-  })
+  });
 }
 
