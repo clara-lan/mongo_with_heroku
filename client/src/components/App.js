@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route} from 'react-router-dom';
+//get react-redux library to make react works with redux;
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 import Header from './Header';
-
-
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 const Landing = () => <h2>Landing!</h2>;
-const App = () => {
-  return (
-    // container will add empty space for the whole page component
-    <div className="container">
-      <BrowserRouter>
-      {/*has only one child*/}
-        <div>
-          {/*header here will like text between routes, which will ne always visible*/}
-          <Header />
-          <Route exact path='/' component = {Landing} />
-          <Route exact path='/surveys' component = {Dashboard} />
-          <Route path='/surveys/new' component={SurveyNew} /> 
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+
+class App extends Component{
+  componentDidMount(){
+    //call at initial of render(only once)
+    //when render the component, verify current user, no big difference here with willMount
+    
+    // calls action
+    this.props.fetchUser();
+  }
+
+  render(){
+    return (
+      // container will add empty space for the whole page component
+      <div className="container"  style={{backgroundColor:'lightblue'}}>
+        <BrowserRouter>
+        {/*has only one child*/}
+          <div>
+            {/*header here will like text between routes, which will ne always visible*/}
+            <Header />
+            <Route exact path='/' component = {Landing} />
+            <Route exact path='/surveys' component = {Dashboard} />
+            <Route path='/surveys/new' component={SurveyNew} /> 
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+  }
 };
 
 
-export default App;
+export default connect(null, actions)(App);

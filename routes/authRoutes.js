@@ -16,7 +16,14 @@ module.exports = (app) => {
   //different with the first handler app.get
   // the page to authenticate user with google
   // when user vist '.../callback', passport will authenticate google users
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback', 
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+    
+    );
 
   // '/' refers to the homepage directly at the port
   // the second arg is a function
