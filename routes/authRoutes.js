@@ -47,8 +47,10 @@ module.exports = (app) => {
 app.get('/api/logout', (req, res) => {
   //passport attached func, used to logout
   req.logout();
-  // res.send will return undefined because no user for now
-  res.send(req.user);
+//redirect user to home page after log out
+  res.redirect('/');
+  //  res.send will return undefined because no user for now
+  // res.send(req.user);
 
 })
 
