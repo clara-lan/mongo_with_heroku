@@ -10,5 +10,11 @@ export const fetchUser = () => async dispatch => {
   //relative path here, so need to edit proxy, check the setupProxy.js in client/src)
   // use promise/async(.then), so only dispatch after the request completed
   const res = await axios.get('/api/current_user');
-  dispatch({ type:FETCH_USER, payload:res.data});// res:output from axios
+  dispatch({ type:FETCH_USER, payload: res.data});// res:output from axios
 };
+
+export const handleToken = (token) => async dispatch =>{
+  const res = await axios.post('/api/stripe', token);
+  // update user data inside reducer
+  dispatch({type:FETCH_USER, payload: res.data});
+}

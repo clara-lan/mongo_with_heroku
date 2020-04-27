@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
+
 //use require instead of import
 // schema user should before require passpors;
 // because we need to set up the model class first then passport would be able to use it
@@ -27,7 +29,7 @@ mongoose.connect(keys.mongoURI);
 //another way to import:
 // when require the routes, it return a func, then call it with app params immediately
 const app = express();
-
+app.use(bodyParser.json());
 app.use(
   // cookieSession model
   cookieSession({
@@ -44,7 +46,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+//both routes file return the func called app
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
+
 
 // specify port without deployment
 // express listen to traffic at 5000, from node

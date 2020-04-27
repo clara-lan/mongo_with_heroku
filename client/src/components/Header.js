@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import StripePayment from './StripePayment';
 
 class Header extends Component {
   renderContent(){
@@ -9,9 +9,15 @@ class Header extends Component {
       case null:
         return ;// during fetching, it returns nothing
       case false:
-        return (<a href="/auth/google">Login With Google</a>);
+        return <a href="/auth/google">Login With Google</a>;
       default:
-        return <li><a href='/api/logout'>Log out</a></li>;
+        //return different component as an array
+        return [
+          <Nav.Item key="1" style={{marginLeft: "-20%"}}> <StripePayment /> </Nav.Item> ,
+          <Nav.Item key="2" style={ {margin:'auto'} }>
+           <a href="/api/logout">Log out</a>
+          </Nav.Item>
+      ];
     }
   }
 
@@ -19,10 +25,10 @@ class Header extends Component {
     return (
       <Navbar bg="light" expand="lg">
         <Navbar.Brand > 
-          <Link to={this.props.auth ? '/surveys': '/'}
+          <Nav.Link to={this.props.auth ? '/surveys': '/'}
           >
             Emaily
-          </Link>
+          </Nav.Link>
         </Navbar.Brand>
         <Navbar.Collapse>
           <Nav className="ml-auto">
