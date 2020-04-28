@@ -8,6 +8,8 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   googleID: String,
   facebookID:String,
+  //define credits for stripe
+  credits: { type:Number,default:0}
 });
 
 
