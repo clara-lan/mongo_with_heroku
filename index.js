@@ -51,6 +51,23 @@ require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
 
+//add configuration for production ver(deployment)
+if(process.env.NODE_ENV ==='production'){
+  //Express will serve up production assests like main.js or main.css
+  // if the app.get request give some unclear routes, express will offer the client/build asset
+  //(like 'api/stripe', which is defined in server/routes so that the client server can't know)
+  app.use(express.static('client/build'));
+
+  // Express will serve up the index.html
+  // if it doesn't recognize the route
+  const path = require('path');
+  app.get('*', (req, res) =>{
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'
+    ));
+  })
+
+}
+
 // specify port without deployment
 // express listen to traffic at 5000, from node
 // app.listen(5000);

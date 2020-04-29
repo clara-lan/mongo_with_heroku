@@ -13,19 +13,23 @@ class Header extends Component {
       default:
         //return different component as an array
         return [
-          <Nav.Item key="1" style={{marginLeft: "-20%"}}> <StripePayment /> </Nav.Item> ,
-          <Nav.Item key="2" style={ {margin:'auto'} }>
-           <a href="/api/logout">Log out</a>
-          </Nav.Item>
+          <Nav.Item key="1" style={{margin: "auto 14px"}}> <StripePayment /> </Nav.Item> ,
+          <Nav.Item key ="3" style={{margin:'26px 10px', color:'white'}}> 
+            Credits:{this.props.auth.credits}
+          </Nav.Item>,
+          <Nav.Link key="2" href="/api/logout" style={ {margin:'auto 9px', color:'white'} }>
+            Log out
+          </Nav.Link>
+         
       ];
     }
   }
 
   render(){
     return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="info" expand="lg" variant="dark">
         <Navbar.Brand > 
-          <Nav.Link to={this.props.auth ? '/surveys': '/'}
+          <Nav.Link to={this.props.auth ? '/surveys': '/'} style={{color:'white'}}
           >
             Emaily
           </Nav.Link>
