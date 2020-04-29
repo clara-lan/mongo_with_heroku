@@ -9,9 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 //createStore(reducer, initial state, middleware)
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
+ //provider offers state change from redux store 
 ReactDom.render(
-  //provider offers state change from redux store 
   <Provider store={store}>
     <App />
   </Provider>,

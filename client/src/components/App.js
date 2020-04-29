@@ -21,7 +21,6 @@ class App extends Component{
 
   render(){
     return (
-      // container will add empty space for the whole page component
       <div className="container" >
         <BrowserRouter>
         {/*has only one child*/}
