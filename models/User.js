@@ -9,7 +9,7 @@ const userSchema = new Schema({
   googleID: String,
   facebookID:String,
   //define credits for stripe
-  credits: { type:Number,default:0}
+  credits: { type:Number, default:0}
 });
 
 

@@ -1,5 +1,5 @@
 //export as a func
-// a generic middleware to call, checking user status
+// a generic middleware to call, checking user loggedin or not
 // next is a func wiil be called after func(req and res) completed
 module.exports = (req, res, next) =>{
   if(!req.user){

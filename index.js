@@ -8,9 +8,10 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 
 //use require instead of import
-// schema user should before require passpors;
+// schema user should before require passports;
 // because we need to set up the model class first then passport would be able to use it
 require('./models/User');
+require('./models/Surveys');
 require('./services/passport');
 
 
@@ -49,7 +50,7 @@ app.use(passport.session());
 //both routes file return the func called app
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
-
+require('./routes/surveyRoutes')(app);
 
 //add configuration for production ver(deployment)
 if(process.env.NODE_ENV ==='production'){
