@@ -1,8 +1,6 @@
 node_modules/
 
 client/node_modules/
-dev.jssendgrid.env
-sendgrid.env
+dev.js
 sendgrid.env
 
-config/dev.js
