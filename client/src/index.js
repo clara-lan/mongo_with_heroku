@@ -6,6 +6,7 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
+// use axios (in browser) to make http request to external sources
 import axios from 'axios';
 window.axios = axios;
 

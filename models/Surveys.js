@@ -1,3 +1,4 @@
+//create survey collection and schema in mongoDB
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 // import recipient to surveys then no need to import recipient to index.js again

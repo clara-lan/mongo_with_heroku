@@ -6,8 +6,15 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = app =>{
+  // send msg to customer after clicking the survey
+  app.get('/api/surveys/thanks',(req,res) =>{
+    res.send('Thanks for voting.');
+  });
+
+
+
   // several funcs could be passed in () and will be executed in line
-  app.post('/api/surveys', requireLogin, requireCredits, (req,res) =>{
+  app.post('/api/surveys', requireLogin, requireCredits, async (req,res) =>{
     // what props we will get from frontend, within the req.body 
     const { title, subject, body, recipients } = req.body;
     const survey = new Survey({
@@ -23,6 +30,19 @@ module.exports = app =>{
     // send email after create survey
     //passing the survey template in html as the second param
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    mailer.send();
+    
+    //if anything within try part is wrong, return the error with code 422
+    try{
+      await mailer.send();
+      // responding to async func and save survey info to database
+      await survey.save();
+      req.user.credits -= 1;
+      const user = await req.user.save();
+
+      //update new user details
+      res.send(user);
+    }catch(err){
+      res.status(422).send(err);
+    }
   });
 };
