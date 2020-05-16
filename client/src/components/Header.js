@@ -17,7 +17,7 @@ class Header extends Component {
           <Nav.Item key ="3" style={{margin:'26px 10px', color:'white'}}> 
             Credits:{this.props.auth.credits}
           </Nav.Item>,
-          <Nav.Link key="2" href="/api/logout" style={ {margin:'auto 9px', color:'white'} }>
+          <Nav.Link key="2" href="/api/logout" style={ {marginTop:'18px', margRight:'9px', color:'white'} }>
             Log out
           </Nav.Link>
          

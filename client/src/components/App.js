@@ -25,8 +25,9 @@ class App extends Component{
         <BrowserRouter>
         {/*has only one child*/}
           <div>
-            {/*header here will like text between routes, which will ne always visible*/}
-            <Header />
+            {/*header here will like text between routes, which will be always visible*/}
+            {/* set auth to false, default render "log in with google" */}
+            <Header auth={false}/>
             <Route exact path='/' component = {Landing} />
             <Route exact path='/surveys' component = {Dashboard} />
             <Route path='/surveys/new' component={SurveyNew} /> 
