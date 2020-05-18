@@ -8,6 +8,8 @@ import SurveyField from './SurveyField';
 import { Button, Form } from 'react-bootstrap';
 import  { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import { faCheck} from '@fortawesome/free-solid-svg-icons';
+import validateEmails from '../../utils/validateEmails';
+
 
 //use capital letters to stress, do not change this array
 const FIELDS =[
@@ -61,6 +63,11 @@ function validate(values) {
   // otherwise redux would return the error 
   const errors = {};
 
+  // init value is empty, inthis case return ' ' (empty strings)
+  // put after Line77, will override the united error msg
+  errors.emails = validateEmails(values.emails || '');
+
+
   // also use lodash lib
   _.each(FIELDS,({ name })=>{
     // different return with values.name
@@ -68,6 +75,10 @@ function validate(values) {
       errors[name] = 'This line cannot be empty.'
     }
   });
+
+
+  //if errors not empty, will return value of errors
+  return errors;
 
   //plain style without loop
   // if (!values.title) {
