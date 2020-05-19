@@ -2,7 +2,7 @@ const sendgrid = require('sendgrid');
 const helper = sendgrid.mail;
 const keys = require('../config/keys');
 const fetch = require("node-fetch");
-const sender = require('../config/sender');
+const sender = keys.senderKey;
 
 class Mailer extends helper.Mail{
   // when call Mailer func outside, constructor will be the first to execute
