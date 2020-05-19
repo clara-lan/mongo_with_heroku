@@ -8,6 +8,7 @@ import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 
 
 class App extends Component{
@@ -21,6 +22,7 @@ class App extends Component{
 
   render(){
     return (
+     
       <div className="container" >
         <BrowserRouter>
         {/*has only one child*/}

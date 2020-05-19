@@ -9,15 +9,10 @@ import { Button, Form } from 'react-bootstrap';
 import  { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import { faCheck} from '@fortawesome/free-solid-svg-icons';
 import validateEmails from '../../utils/validateEmails';
-
+import FIELDS from './formFields';
 
 //use capital letters to stress, do not change this array
-const FIELDS =[
-  { label:"Survey Titile", name:"title" },
-  { label:"Subject Line", name:"subject" },
-  { label:"Email Body", name:"body" },
-  { label:"Recipient List", name:"emails"}
-];
+
 
 class SurveyForm extends Component{
   // render different fields through a func
@@ -35,7 +30,9 @@ class SurveyForm extends Component{
     return (
       <div>
         <Form style={{ textAlign:"left" }}
-          onSubmit={this.props.handleSubmit(value => console.log(value))}
+        //pass onSurveySubmit to handleSubmit without call onSurveySumit func
+        // becase onSurveySubmit only to be called after user submit the form,(after onSubmit is executed)
+          onSubmit={this.props.handleSubmit( this.props.onSurveySubmit)}
         >
            { this.renderFields() }
           <br/>
@@ -65,7 +62,7 @@ function validate(values) {
 
   // init value is empty, inthis case return ' ' (empty strings)
   // put after Line77, will override the united error msg
-  errors.emails = validateEmails(values.emails || '');
+  errors.recipients = validateEmails(values.recipients || '');
 
 
   // also use lodash lib
@@ -92,16 +89,19 @@ function validate(values) {
   // if(!values.body){
   //   errors.body= "Title can not be empty."
   // }
-  if(!values.emails){
+  // if(!values.emails){
 
-  }
+  // }
 
-  return errors;
+  // return errors;
 }
 
 export default reduxForm({
   // params for reduxForm
   // old ver: validate: validate,
   validate,
-  form: 'surveyForm'
+  //name the values in the survey form
+  form: 'surveyForm',
+  // if true, won't save value when temporarily leave the form
+  destroyOnUnmount:false
 })(SurveyForm);

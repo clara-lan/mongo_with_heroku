@@ -13,8 +13,19 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type:FETCH_USER, payload: res.data});// res:output from axios
 };
 
-export const handleToken = (token) => async dispatch =>{
+export const handleToken = token => async dispatch =>{
   const res = await axios.post('/api/stripe', token);
   // update user data inside reducer
   dispatch({type:FETCH_USER, payload: res.data});
 }
+
+// create type for redux
+// post data to DB
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', values);
+  
+  history.push('/surveys');
+  dispatch( {type: FETCH_USER, payload: res.data});
+  
+  
+};
