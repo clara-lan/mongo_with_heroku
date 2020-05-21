@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return(
@@ -6,7 +7,9 @@ const Landing = () => {
       <h1>
         Emaily!
       </h1>
+     <Link to="/surveys">
       Collect feedback!
+      </Link>
     </div>
   );
 };
