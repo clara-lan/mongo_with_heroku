@@ -11,7 +11,10 @@ module.exports = app =>{
     res.send('Thanks for voting.');
   });
 
-
+  app.post('/api/surveys/webhooks', (req,res)=>{
+    console.log(req.body);
+    res.send({});
+  })
 
   // several funcs could be passed in () and will be executed in line
   app.post('/api/surveys', requireLogin, requireCredits, async (req,res) =>{
