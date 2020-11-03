@@ -6,4 +6,4 @@ if(process.env.NODE_ENV === 'production'){
   //in dev, export dev file to the module
   module.exports = require('./dev');
 
-};
+};    

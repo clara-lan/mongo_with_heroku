@@ -15,8 +15,8 @@ require('./models/Surveys');
 require('./services/passport');
 
 
-
-mongoose.connect(keys.mongoURI);
+// check mongoDB altas for ip address(in db project0)
+mongoose.connect(keys.mongoURI, { useUnifiedTopology: true,useNewUrlParser: true });
 
 //tell express to use cookie-session
 
